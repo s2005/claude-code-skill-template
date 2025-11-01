@@ -91,9 +91,16 @@ jobs:
           # Copy SKILL.md (required)
           cp SKILL.md "build/$SKILL_NAME/"
 
+          # Copy optional files if they exist
+          [ -f "README.md" ] && cp README.md "build/$SKILL_NAME/" || echo "No README.md"
+          [ -f "LICENSE" ] && cp LICENSE "build/$SKILL_NAME/" || echo "No LICENSE"
+          [ -f "VERSION" ] && cp VERSION "build/$SKILL_NAME/" || echo "No VERSION"
+
           # Copy optional directories if they exist
           [ -d "docs" ] && cp -r docs "build/$SKILL_NAME/" || echo "No docs/ directory"
+          [ -d "references" ] && cp -r references "build/$SKILL_NAME/" || echo "No references/ directory"
           [ -d "scripts" ] && cp -r scripts "build/$SKILL_NAME/" || echo "No scripts/ directory"
+          [ -d "assets" ] && cp -r assets "build/$SKILL_NAME/" || echo "No assets/ directory"
           [ -d "examples" ] && cp -r examples "build/$SKILL_NAME/" || echo "No examples/ directory"
 
           # Create zip archive from within the build directory
