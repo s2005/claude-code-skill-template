@@ -97,7 +97,14 @@ jobs:
           [ -f "VERSION" ] && cp VERSION "build/$SKILL_NAME/" || echo "No VERSION"
 
           # Copy optional directories if they exist
-          [ -d "docs" ] && cp -r docs "build/$SKILL_NAME/" || echo "No docs/ directory"
+          # For docs, only copy specific subdirectories (exclude docs/tasks/)
+          if [ -d "docs/guides" ]; then
+            mkdir -p "build/$SKILL_NAME/docs"
+            cp -r docs/guides "build/$SKILL_NAME/docs/"
+            echo "Copied docs/guides/"
+          else
+            echo "No docs/guides/ directory"
+          fi
           [ -d "references" ] && cp -r references "build/$SKILL_NAME/" || echo "No references/ directory"
           [ -d "scripts" ] && cp -r scripts "build/$SKILL_NAME/" || echo "No scripts/ directory"
           [ -d "assets" ] && cp -r assets "build/$SKILL_NAME/" || echo "No assets/ directory"
