@@ -131,6 +131,7 @@ Follow [Semantic Versioning](https://semver.org/):
   - **PATCH**: Bug fixes (backward compatible)
 
 **Examples:**
+
 - `0.0.1` - Initial development
 - `0.1.0` - First feature complete
 - `1.0.0` - First stable release
@@ -149,6 +150,7 @@ gh run view <failed-run-id> --log
 ```
 
 **Common issues:**
+
 - VERSION file not found → Ensure VERSION exists in root
 - SKILL.md validation failed → Check YAML frontmatter
 - Archive validation failed → Verify required files exist

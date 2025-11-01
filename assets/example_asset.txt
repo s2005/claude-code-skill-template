@@ -1,0 +1,22 @@
+This is an example asset file.
+
+Assets are files NOT intended to be loaded into context, but rather used within the output Claude produces.
+
+Examples of asset files:
+- Templates (HTML, PowerPoint, etc.)
+- Images (logos, icons)
+- Boilerplate code
+- Fonts
+- Sample documents that get copied or modified
+
+This file should be customized or deleted based on your skill's needs.
+
+For example, if you're building a frontend-webapp-builder skill, you might have:
+- assets/frontend-template/index.html
+- assets/frontend-template/style.css
+- assets/frontend-template/app.js
+
+If you're building a brand-guidelines skill, you might have:
+- assets/logo.png
+- assets/font.ttf
+- assets/presentation-template.pptx

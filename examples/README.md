@@ -15,7 +15,7 @@ Examples help users understand how to use your skill effectively. Include:
 
 Organize examples by use case:
 
-```
+```text
 examples/
 ├── README.md           # This file
 ├── basic/              # Basic usage examples
@@ -44,10 +44,10 @@ python scripts/your_script.py --input examples/basic/input.txt
 ```
 
 **Advanced Usage:**
+
 ```bash
 # Run with advanced config
 python scripts/your_script.py --config examples/advanced/config.json
-```
 ```
 
 ## Best Practices

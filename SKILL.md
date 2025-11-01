@@ -1,102 +1,171 @@
 ---
 name: your-skill-name
-description: Brief description of when this skill should be used. Include key trigger words and use cases that Claude should recognize.
+description: This skill should be used when the user asks about [X], needs to [Y], or mentions [Z]. Use when queries involve [key terms, file types, specific actions]. Be specific about trigger words and scenarios.
 ---
 
 # Your Skill Name
 
+**Note:** This template follows Anthropic's skill-creator best practices. Use imperative/infinitive form (verb-first instructions) throughout.
+
 ## Purpose
 
-Explain what this skill does and why it's useful. Be specific about the problems it solves.
+[2-3 sentences] Explain what this skill does and why it's useful. Be specific about the problems it solves.
+
+Example: "This skill provides tools and workflows for rotating, cropping, and editing PDF documents. It simplifies PDF manipulation tasks that would otherwise require re-writing the same code repeatedly."
 
 ## When to Use This Skill
 
-List the scenarios where Claude should activate this skill:
-- When the user asks about [specific topic]
-- When the user needs to [specific action]
-- When working with [specific files/formats]
-- When queries mention [key terms]
+This skill should be used when:
+
+- The user asks about [specific topic]
+- The user needs to [specific action]
+- Working with [specific files/formats]
+- Queries mention [key terms]
+
+Example:
+
+- The user asks to rotate, edit, or manipulate PDF files
+- The user needs to perform batch operations on PDFs
+- Working with PDF documents that require structural changes
+- Queries mention "PDF", "rotate", "crop", "merge", or "split"
 
 ## Prerequisites
 
 List any requirements or setup needed:
+
 - Required tools (e.g., Python 3.6+, jq, etc.)
 - Required files or configuration
 - Environment setup
 - Permissions needed
 
+Example: "Requires Python 3.8+ with PyPDF2 library installed. Install with: `pip install PyPDF2`"
+
+## Bundled Resources
+
+This skill follows the progressive disclosure principle with three resource types:
+
+### Scripts (`scripts/`)
+
+Executable code for tasks requiring deterministic reliability or frequently rewritten.
+
+**When to include:** When the same code is repeatedly rewritten or deterministic behavior is needed.
+
+**Included scripts:**
+
+- `scripts/example_script.py` - [Description of what it does]
+
+**Usage:**
+
+```bash
+python scripts/example_script.py --option value
+```
+
+### References (`references/`)
+
+Documentation loaded into context as needed to inform Claude's process.
+
+**When to include:** For detailed documentation, schemas, API specs, policies, or domain knowledge.
+
+**Included references:**
+
+- `references/example_reference.md` - [Description of what it contains]
+
+**Note:** Keep SKILL.md lean; move detailed information to reference files. For large files (>10k words), include grep search patterns in this section.
+
+### Assets (`assets/`)
+
+Files used in output, not loaded into context (templates, images, boilerplate).
+
+**When to include:** When the skill needs files for the final output.
+
+**Included assets:**
+
+- `assets/example_asset.txt` - [Description of what it's used for]
+
+**Usage:** Copy, modify, or reference these assets in the output produced.
+
 ## How to Use This Skill
 
-### Basic Usage
+Provide clear, actionable instructions using imperative form. Reference bundled resources where appropriate.
 
-Provide simple examples of how to use the skill:
+### Basic Workflow
 
-**Example 1: [Common Task]**
-```bash
-# Command or script to run
-command --option value
-```
+**Task 1: [Common Task]**
 
-**Example 2: [Another Task]**
-```bash
-# Another example
-another-command
-```
+1. Run the script: `python scripts/example_script.py --input file.pdf`
+2. Verify the output in the specified directory
+3. Handle any errors using the troubleshooting guide below
 
-### Advanced Usage
+**Task 2: [Another Task]**
 
-Provide more complex examples if applicable:
+1. Read the reference documentation: `references/example_reference.md`
+2. Apply the workflow to the user's specific case
+3. Use assets from `assets/` as needed
 
-**Example 3: [Advanced Task]**
-```bash
-# Advanced command with multiple options
-complex-command --option1 value1 --option2 value2
-```
+### Advanced Workflow
+
+**Task 3: [Complex Task]**
+
+1. Combine multiple scripts for batch processing
+2. Reference advanced patterns in `references/advanced.md`
+3. Customize asset templates for specific use cases
 
 ## Key Information
 
 Important details about the skill:
+
 - **Tool/Library:** Name and version
 - **File locations:** Where files are stored
 - **Output format:** What format output is provided
 - **Limitations:** What the skill cannot do
 
-## Common Workflows
+Example:
 
-Provide step-by-step workflows for common tasks:
+- **Tool/Library:** PyPDF2 v3.0+
+- **Input:** PDF files from any location
+- **Output:** Modified PDF files in the same directory or specified output path
+- **Limitations:** Cannot edit PDF content (text/images), only structural operations
 
-**Workflow 1: [Task Name]**
-1. First step
-2. Second step
-3. Third step
+## Troubleshooting
 
-**Workflow 2: [Another Task]**
-1. First step
-2. Second step
-3. Third step
+Common errors and solutions using imperative form:
 
-## Error Handling
+**Error: [Error Message]**
 
-Explain common errors and how to resolve them:
+- **Cause:** [Why this occurs]
+- **Solution:** [How to fix]
+  1. Check [specific condition]
+  2. Run [specific command]
+  3. Verify [expected outcome]
 
-**Error 1: [Error Message]**
-- **Cause:** Why this error occurs
-- **Solution:** How to fix it
+**Error: [Another Error]**
 
-**Error 2: [Error Message]**
-- **Cause:** Why this error occurs
-- **Solution:** How to fix it
+- **Cause:** [Why this occurs]
+- **Solution:** [How to fix]
 
-## Notes
+## Best Practices
 
-Additional information:
-- Important considerations
-- Best practices
-- Tips for optimal use
-- Related resources
+- Use [specific approach] for [specific scenario]
+- Avoid [anti-pattern] because [reason]
+- Prefer [better approach] over [alternative]
+- Test [what to test] before [what depends on it]
+
+## Additional Notes
+
+Important considerations:
+
+- Edge cases or special scenarios
+- Performance considerations
+- Security implications
+- Related tools or resources
+- When to use alternative approaches
 
 ## Examples
 
-Provide real-world examples if applicable. Reference files in the `examples/` directory.
+**Note:** Remove this section or provide real examples. Avoid hypothetical placeholders.
 
-See `examples/` for sample files and usage scenarios.
+Reference actual files in the skill directory:
+
+- See `examples/sample-input.txt` for input format
+- See `examples/expected-output.txt` for expected results
+- See `assets/template.html` for the output template structure
