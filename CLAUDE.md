@@ -120,6 +120,24 @@ description: This skill should be used when the user asks about Docker container
 - Move detailed documentation to `references/` files
 - Provide real examples, not hypothetical ones
 
+### Markdown File Size Constraints
+
+**CRITICAL**: Each markdown file packaged in a skill must adhere to strict size limits:
+
+- **Preferred**: Keep each `.md` file under 500 lines
+- **Maximum**: More than 1000 lines is NOT ALLOWED (critical constraint)
+
+This applies to all markdown files in the skill:
+- SKILL.md
+- files in `references/` directory
+- documentation files in `docs/`
+
+If content exceeds these limits:
+- Split into multiple smaller files
+- Move detailed content to separate reference files
+- Use clear cross-references between files
+- Consider using scripts for large data/schemas
+
 ### Bundled Resources Guidelines
 
 #### When to include scripts/
