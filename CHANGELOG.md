@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.7] - 2025-11-05
+
 ### Added
 
 - Skill name validation system
@@ -42,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Previously, invalid names (uppercase, underscores, spaces) would only fail during claude.ai deployment
   - Now caught during GitHub Actions workflow before release
   - Can be tested locally before any commits
+- MD036 linter error in SETUP.md (changed bold emphasis to proper heading)
 
 ## [0.0.6] - 2025-11-05
 
@@ -135,7 +138,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - LICENSE file (MIT License)
 - .gitignore with Python, IDE, and OS patterns
 
-[Unreleased]: https://github.com/s2005/claude-code-skill-template/compare/v0.0.6...HEAD
+[Unreleased]: https://github.com/s2005/claude-code-skill-template/compare/v0.0.7...HEAD
+[0.0.7]: https://github.com/s2005/claude-code-skill-template/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/s2005/claude-code-skill-template/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/s2005/claude-code-skill-template/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/s2005/claude-code-skill-template/compare/v0.0.3...v0.0.4
