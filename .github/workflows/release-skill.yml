@@ -110,6 +110,17 @@ jobs:
           [ -d "assets" ] && cp -r assets "build/$SKILL_NAME/" || echo "No assets/ directory"
           [ -d "examples" ] && cp -r examples "build/$SKILL_NAME/" || echo "No examples/ directory"
 
+          # Display build contents
+          echo ""
+          echo "Build directory contents:"
+          find build -type f | sort
+        id: build
+
+      - name: Create zip for release
+        if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && github.event.inputs.create_release == 'true')
+        run: |
+          SKILL_NAME=$(grep "^name:" SKILL.md | head -1 | sed 's/^name:[[:space:]]*//')
+
           # Create zip archive from within the build directory
           cd build
           zip -r "../${SKILL_NAME}-skill.zip" "$SKILL_NAME/"
@@ -124,9 +135,9 @@ jobs:
           echo ""
           echo "Archive size:"
           ls -lh "${SKILL_NAME}-skill.zip"
-        id: build
 
       - name: Validate skill archive
+        if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && github.event.inputs.create_release == 'true')
         run: |
           echo "Validating skill archive..."
 
@@ -149,10 +160,35 @@ jobs:
           echo "✓ Archive structure is valid for Claude Code installation"
           cd ..
 
-      - name: Upload skill artifact
+      - name: Validate skill directory
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.create_release != 'true'
+        run: |
+          echo "Validating skill directory..."
+
+          # Extract skill name
+          SKILL_NAME=$(grep "^name:" SKILL.md | head -1 | sed 's/^name:[[:space:]]*//')
+
+          # Verify the expected structure
+          if [ ! -f "build/${SKILL_NAME}/SKILL.md" ]; then
+            echo "ERROR: Build directory does not contain ${SKILL_NAME}/SKILL.md"
+            exit 1
+          fi
+
+          echo "✓ Skill directory structure is valid for Claude Code installation"
+
+      - name: Upload skill artifact (directory for workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.create_release != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.build.outputs.skill_name }}-skill-${{ steps.get_version.outputs.version }}
+          name: ${{ steps.build.outputs.skill_name }}-skill
+          path: build/${{ steps.build.outputs.skill_name }}/
+          retention-days: 90
+
+      - name: Upload skill artifact (zip for release)
+        if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && github.event.inputs.create_release == 'true')
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.build.outputs.skill_name }}-skill
           path: ${{ steps.build.outputs.skill_name }}-skill.zip
           retention-days: 90
 
