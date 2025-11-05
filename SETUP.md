@@ -88,7 +88,7 @@ description: This skill helps with [X] when user asks about [Y]  # ← Make this
 ---
 ```
 
-**CRITICAL: Skill Naming Requirements**
+#### CRITICAL: Skill Naming Requirements
 
 Claude.ai enforces strict naming rules. Your skill will **fail deployment** if the name is invalid.
 
