@@ -83,9 +83,40 @@ Open `SKILL.md` and customize:
 
 ```yaml
 ---
-name: my-awesome-skill  # ← Change this to your skill name (lowercase, hyphenated)
+name: my-awesome-skill  # ← Change this to your skill name (see naming rules below!)
 description: This skill helps with [X] when user asks about [Y]  # ← Make this VERY specific!
 ---
+```
+
+#### CRITICAL: Skill Naming Requirements
+
+Claude.ai enforces strict naming rules. Your skill will **fail deployment** if the name is invalid.
+
+**Required format:**
+
+- Only lowercase letters (a-z), numbers (0-9), and hyphens (-)
+- Must start with a letter or number
+- Must end with a letter or number (not a hyphen)
+- No underscores, spaces, or uppercase letters
+
+**Valid names:**
+
+- `my-skill` ✓
+- `pdf-helper` ✓
+- `cli-helper` ✓
+- `docker2k8s` ✓
+
+**Invalid names:**
+
+- `My-Skill` ✗ (uppercase)
+- `my_skill` ✗ (underscore)
+- `my-skill-` ✗ (ends with hyphen)
+- `my skill` ✗ (space)
+
+**Test your name:**
+
+```bash
+./scripts/validate-skill-name.sh
 ```
 
 **Important:** The `description` field is how Claude decides to use your skill!
