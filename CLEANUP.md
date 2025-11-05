@@ -363,23 +363,27 @@ find . -name "*.md" -not -path "*/node_modules/*" -not -path "*/.git/*" | sort
 Once cleanup is complete:
 
 1. **Test locally:**
+
    ```bash
    cp -r . ~/.claude/skills/your-actual-skill-name
    # Test with Claude Code
    ```
 
 2. **Commit changes:**
+
    ```bash
    git add .
    git commit -m "Clean up template files and customize for [your skill name]"
    ```
 
 3. **Push to your repository:**
+
    ```bash
    git push origin main
    ```
 
 4. **Remove CLEANUP.md:**
+
    ```bash
    git rm CLEANUP.md
    git commit -m "Remove cleanup guide"
