@@ -87,6 +87,7 @@ See `docs/tasks/release/how-to-release.md` for detailed instructions.
 - **VERSION** - Single version number for releases (e.g., `0.0.1`)
 - **README.md** - User-facing documentation and installation instructions
 - **SETUP.md** - Step-by-step setup guide for customizing the template
+- **CLEANUP.md** - Guide for removing template files and placeholders after customization
 - **.markdownlint-cli2.jsonc** - Markdown linter config (MD013 disabled)
 - **docs/tasks/release/how-to-release.md** - Release workflow documentation
 - **docs/tasks/tests/how-to-test-skill.md** - Testing framework and test cases
@@ -128,11 +129,13 @@ description: This skill should be used when the user asks about Docker container
 - **Maximum**: More than 1000 lines is NOT ALLOWED (critical constraint)
 
 This applies to all markdown files in the skill:
+
 - SKILL.md
 - files in `references/` directory
 - documentation files in `docs/`
 
 If content exceeds these limits:
+
 - Split into multiple smaller files
 - Move detailed content to separate reference files
 - Use clear cross-references between files
@@ -185,6 +188,42 @@ Create specific test cases for each skill feature with expected inputs/outputs.
 8. Create release when ready
 
 See `SETUP.md` for complete step-by-step instructions.
+
+### Cleaning Up Template Files
+
+After customizing your skill, remove template-specific files and placeholders:
+
+**Manual approach:**
+
+1. Follow the 8-phase cleanup checklist in `CLEANUP.md`
+2. Remove example files (scripts/example_script.py, references/example_reference.md, etc.)
+3. Delete unused directories (scripts/, references/, assets/, examples/ if empty)
+4. Replace all placeholders in SKILL.md, README.md, and other files
+5. Update repository URLs from template to your repository
+6. Run verification commands to check for remaining placeholders
+7. Test the skill locally before committing
+
+**With Claude Code:**
+
+Ask: "Help me clean up this template repository using CLEANUP.md"
+
+**Automated script:**
+
+```bash
+# Run the cleanup script from CLEANUP.md
+chmod +x cleanup-template.sh
+./cleanup-template.sh
+# Then manually update core files as prompted
+```
+
+**Files to remove after cleanup:**
+
+- SETUP.md (after initial setup)
+- CLEANUP.md (after cleanup is complete)
+- Example files: scripts/example_script.py, references/example_reference.md, assets/example_asset.txt
+- Empty directories that you don't need
+
+See `CLEANUP.md` for complete instructions with verification commands.
 
 ### Validation Before Release
 
