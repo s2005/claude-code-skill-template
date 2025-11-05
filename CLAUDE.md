@@ -35,10 +35,23 @@ The repository includes `.github/workflows/release-skill.yml` which automaticall
 
 - Extracts version from VERSION file
 - Validates SKILL.md structure (frontmatter with name/description)
+- **Validates skill name format** (lowercase, numbers, hyphens only)
 - Builds skill distribution ZIP
 - Attaches to GitHub releases
 
+The workflow will fail fast if the skill name doesn't meet claude.ai requirements, preventing deployment of invalid skills.
+
 ## Development Commands
+
+### Validating Skill Name
+
+Before committing or deploying, validate your skill name:
+
+```bash
+./scripts/validate-skill-name.sh
+```
+
+This script checks that your skill name follows claude.ai requirements (lowercase, numbers, hyphens only). It uses the same validation logic as the GitHub Actions workflow.
 
 ### Testing the Skill Locally
 
@@ -93,6 +106,40 @@ See `docs/tasks/release/how-to-release.md` for detailed instructions.
 - **docs/tasks/tests/how-to-test-skill.md** - Testing framework and test cases
 
 ## Skill Development Best Practices
+
+### SKILL.md Name Field
+
+The name field must follow Claude.ai's strict naming requirements:
+
+**Required format:**
+
+- Only lowercase letters (a-z), numbers (0-9), and hyphens (-)
+- Must start with a letter or number
+- Must end with a letter or number (not a hyphen)
+- No underscores, spaces, uppercase letters, or special characters
+
+**Validation:**
+
+```bash
+# Test locally before committing
+./scripts/validate-skill-name.sh
+
+# Automatically validated during GitHub Actions workflow
+```
+
+**Valid examples:**
+
+- `docker-helper` ✓
+- `pdf-processor` ✓
+- `cli-helper` ✓
+- `skill123` ✓
+
+**Invalid examples:**
+
+- `Docker-Helper` ✗ (uppercase)
+- `docker_helper` ✗ (underscore)
+- `docker-helper-` ✗ (ends with hyphen)
+- `docker helper` ✗ (space)
 
 ### SKILL.md Description Field
 

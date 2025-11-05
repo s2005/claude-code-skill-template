@@ -1,4 +1,9 @@
 ---
+# IMPORTANT: Skill name must contain only lowercase letters, numbers, and hyphens
+# Must start and end with a letter or number (not a hyphen)
+# Valid: my-skill, pdf-helper, cli-helper, docker2k8s
+# Invalid: My-Skill, my_skill, my-skill-, -my-skill
+# Test locally: ./scripts/validate-skill-name.sh
 name: your-skill-name
 description: This skill should be used when the user asks about [X], needs to [Y], or mentions [Z]. Use when queries involve [key terms, file types, specific actions]. Be specific about trigger words and scenarios.
 ---

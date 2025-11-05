@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Skill name validation system
+  - New validation step in GitHub Actions workflow (`.github/workflows/release-skill.yml`)
+  - Validates skill name format: lowercase letters, numbers, and hyphens only
+  - Must start and end with alphanumeric character (not hyphen)
+  - Provides clear error messages with valid/invalid examples
+  - Fails fast before building if name is invalid
+  - Local validation script (`scripts/validate-skill-name.sh`)
+  - Test skill names before committing: `./scripts/validate-skill-name.sh`
+  - Color-coded output for better readability
+
+### Changed
+
+- SKILL.md frontmatter now includes naming requirement comments
+  - Shows valid and invalid naming examples
+  - References validation script
+- README.md
+  - New "Skill Naming Requirements" section with detailed rules
+  - Added validation instructions to "Customization Guide"
+- SETUP.md
+  - Emphasized naming rules as CRITICAL requirement
+  - Added valid/invalid examples with visual indicators
+  - Instructions to test names locally before committing
+- CLAUDE.md
+  - New "SKILL.md Name Field" section documenting naming requirements
+  - Updated "GitHub Actions Workflow" section to mention validation
+  - New "Validating Skill Name" section under "Development Commands"
+
+### Fixed
+
+- Prevents deployment of skills with invalid names to claude.ai
+  - Previously, invalid names (uppercase, underscores, spaces) would only fail during claude.ai deployment
+  - Now caught during GitHub Actions workflow before release
+  - Can be tested locally before any commits
+
 ## [0.0.6] - 2025-11-05
 
 ### Added in 0.0.6

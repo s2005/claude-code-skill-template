@@ -74,6 +74,49 @@ jobs:
           echo "Skill contents:"
           find . -type f -not -path "./.git/*" -not -path "./.github/*" | sort
 
+      - name: Validate skill name format
+        run: |
+          echo "Validating skill name format..."
+
+          # Extract skill name from SKILL.md
+          SKILL_NAME=$(grep "^name:" SKILL.md | head -1 | sed 's/^name:[[:space:]]*//')
+          echo "Skill name: '$SKILL_NAME'"
+
+          # Validate format: lowercase letters, numbers, and hyphens only
+          # Must start and end with alphanumeric character (not hyphen)
+          # Single character names are allowed (e.g., "x", "1")
+          if ! echo "$SKILL_NAME" | grep -qE '^[a-z0-9]([a-z0-9-]*[a-z0-9])?$'; then
+            echo ""
+            echo "❌ ERROR: Invalid skill name format"
+            echo ""
+            echo "Skill names must:"
+            echo "  - Contain only lowercase letters (a-z), numbers (0-9), and hyphens (-)"
+            echo "  - Start with a lowercase letter or number"
+            echo "  - End with a lowercase letter or number (not a hyphen)"
+            echo "  - Not contain consecutive hyphens, underscores, or spaces"
+            echo ""
+            echo "Valid examples:"
+            echo "  ✓ my-skill"
+            echo "  ✓ pdf-helper"
+            echo "  ✓ cli-helper"
+            echo "  ✓ docker2k8s"
+            echo "  ✓ skill123"
+            echo ""
+            echo "Invalid examples:"
+            echo "  ✗ My-Skill (uppercase)"
+            echo "  ✗ my_skill (underscore)"
+            echo "  ✗ my-skill- (ends with hyphen)"
+            echo "  ✗ -my-skill (starts with hyphen)"
+            echo "  ✗ my skill (space)"
+            echo ""
+            echo "Your skill name: '$SKILL_NAME'"
+            echo ""
+            echo "Suggested fix: Update the 'name:' field in SKILL.md frontmatter"
+            exit 1
+          fi
+
+          echo "✓ Skill name format is valid"
+
       - name: Build skill distribution
         run: |
           echo "Building skill package for Claude Code..."

@@ -153,6 +153,49 @@ gh repo create your-skill-name --public --source=. --description="Your skill des
 git push -u origin main
 ```
 
+## Skill Naming Requirements
+
+**IMPORTANT:** Claude.ai has strict requirements for skill names. Your skill will fail deployment if the name doesn't follow these rules.
+
+### Required Format
+
+Skill names must:
+
+- Contain **only** lowercase letters (a-z), numbers (0-9), and hyphens (-)
+- Start with a lowercase letter or number
+- End with a lowercase letter or number (not a hyphen)
+- Not contain underscores, spaces, or uppercase letters
+
+### Valid Examples
+
+- `my-skill`
+- `pdf-helper`
+- `cli-helper`
+- `docker2k8s`
+- `skill123`
+
+### Invalid Examples
+
+- `My-Skill` (contains uppercase)
+- `my_skill` (contains underscore)
+- `my-skill-` (ends with hyphen)
+- `-my-skill` (starts with hyphen)
+- `my skill` (contains space)
+
+### Validation
+
+Test your skill name locally before deployment:
+
+```bash
+# Run validation script
+./scripts/validate-skill-name.sh
+
+# Expected output for valid names:
+# ✓ Valid: Skill name meets all requirements
+```
+
+The GitHub Actions workflow will automatically validate skill names before building releases.
+
 ## Repository Structure
 
 ```text
@@ -168,7 +211,8 @@ claude-code-skill-template/
 │       └── tests/
 │           └── how-to-test-skill.md # Testing guide
 ├── scripts/                        # Executable code (Python/Bash/etc.)
-│   └── example_script.py           # Example script - customize or delete
+│   ├── example_script.py           # Example script - customize or delete
+│   └── validate-skill-name.sh      # Validation script for skill names
 ├── references/                     # Documentation for context loading
 │   └── example_reference.md        # Example reference - customize or delete
 ├── assets/                         # Files used in output (templates, images, etc.)
@@ -251,7 +295,14 @@ description: This skill should be used when the user asks about [X], needs to [Y
 ---
 ```
 
-**Tips:**
+**Naming Requirements:**
+
+- Must contain only lowercase letters, numbers, and hyphens
+- Must start and end with a letter or number (not a hyphen)
+- Run `./scripts/validate-skill-name.sh` to test your name
+- See [Skill Naming Requirements](#skill-naming-requirements) for details
+
+**Description Tips:**
 
 - Be specific about when to use the skill
 - Include trigger words users might say
